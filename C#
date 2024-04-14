@@ -1,0 +1,48 @@
+using System;
+using System.Collections.Generic;
+
+class Result
+{
+    public static long countMax(List<string> upRight)
+    {
+        int minRow = int.MaxValue;
+        int minCol = int.MaxValue;
+
+        foreach (string coord in upRight)
+        {
+            string[] parts = coord.Split(' ');
+            int r = int.Parse(parts[0]);
+            int c = int.Parse(parts[1]);
+
+            minRow = Math.Min(minRow, r);
+            minCol = Math.Min(minCol, c);
+        }
+
+        return (long)minRow * minCol;
+    }
+}
+
+class Solution
+{
+    public static void Main(string[] args)
+    {
+        TextWriter textWriter = new StreamWriter(@System.Environment.GetEnvironmentVariable("OUTPUT_PATH"), true);
+
+        int upRightCount = Convert.ToInt32(Console.ReadLine().Trim());
+
+        List<string> upRight = new List<string>();
+
+        for (int i = 0; i < upRightCount; i++)
+        {
+            string upRightItem = Console.ReadLine();
+            upRight.Add(upRightItem);
+        }
+
+        long result = Result.countMax(upRight);
+
+        textWriter.WriteLine(result);
+
+        textWriter.Flush();
+        textWriter.Close();
+    }
+}
